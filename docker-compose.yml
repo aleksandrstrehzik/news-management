@@ -1,0 +1,55 @@
+version: '3.1'
+services:
+  config-cloud:
+    image: config-service
+    build: config-cloud
+    restart: always
+    networks:
+      - news_ntwrk
+    ports:
+      - "8082:8082"
+
+  news-service:
+    image: news-service
+    build: news
+    container_name: container_news
+    restart: always
+    depends_on:
+      - config-cloud
+      - db
+    environment:
+      - SPRING_PROFILES_ACTIVE=prod
+    networks:
+      - news_ntwrk
+    ports:
+      - "8080:8080"
+
+  security-cloud-service:
+    image: security-cloud-service
+    build: security-cloud
+    container_name: container_security-cloud
+    restart: always
+    depends_on:
+      - config-cloud
+      - db
+    environment:
+      - SPRING_PROFILES_ACTIVE=prod
+    networks:
+      - news_ntwrk
+    ports:
+      - "8081:8081"
+
+  db:
+    image: postgres:15.1-alpine
+    restart: always
+    environment:
+      POSTGRES_DB: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    networks:
+      - news_ntwrk
+    ports:
+      - "5432:5432"
+
+networks:
+  news_ntwrk:
