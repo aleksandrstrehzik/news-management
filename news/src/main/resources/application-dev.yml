@@ -1,0 +1,19 @@
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/postgres
+    username: postgres
+    password: postgres
+  jpa:
+    properties.hibernate:
+      show_sql: true
+      format_sql: true
+  liquibase:
+    change-log: liquibase/db.changelog-master.yaml
+feignclient:
+  value: security
+  url: http://localhost:8081/user
+server.port: 8080
+cache:
+  size: 3
+  algorithm: LFU

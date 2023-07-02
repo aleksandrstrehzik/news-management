@@ -1,0 +1,6 @@
+rootProject.name = 'news-managment'
+include 'news'
+include 'security-cloud'
+include 'exception-handler'
+include 'logging-starter'
+include 'config-cloud'

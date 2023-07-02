@@ -1,0 +1,8 @@
+databaseChangeLog:
+  - include:
+      file: liquibase/2023-05-28-DDL.sql
+  - include:
+      file: liquibase/2023-05-28-insertIntoNews.sql
+  - include:
+      file: liquibase/2023-05-28-insertIntoComment.sql
+
